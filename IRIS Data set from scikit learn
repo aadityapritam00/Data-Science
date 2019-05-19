@@ -1,0 +1,33 @@
+from sklearn import datasets, linear_model
+import  numpy as np
+import matplotlib as mp
+from sklearn.metrics import mean_squared_error
+
+iris=datasets.load_iris()
+
+#dict_keys(['data', 'target', 'target_names', 'DESCR', 'feature_names', 'filename'])
+print(iris.target)
+print("In above figure\n'0' represent->setosa\n'1' represent->versicolor\n'2' represent->virginica")
+print("TYPES IN IRIS FLOWER:",iris.target_names)
+print("MESUREMENTS :" ,iris.feature_names)
+print(iris.data)
+
+iris_x=iris.data[:,np.newaxis,3]
+
+iris_x_train=iris_x[:-10]
+iris_x_test=iris_x[-10:]
+
+iris_y_train=iris.target[:-10]
+iris_y_test=iris.target[-10:]
+
+model=linear_model.LinearRegression()
+
+model.fit(iris_x_train, iris_y_train)
+
+iris_y_predicted=model.predict(iris_x_test)
+
+print("Mean Square error",mean_squared_error(iris_y_test, iris_y_predicted))
+
+#iris = datasets.load_iris()
+#print(list(iris.keys()))
+
